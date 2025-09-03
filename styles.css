@@ -29,23 +29,30 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* アニメーション用ドアパネルのスタイル */
-.door-panel {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    transition: transform 1.5s ease-in-out;
+/* アニメーション用アイコンのスタイル */
+.icon-student,
+.icon-company {
+    transition: all 1s ease-in-out;
 }
 
-.door-panel img {
-    height: 100%;
-    width: 200%;
-    object-fit: cover;
-    object-position: 0 0;
+.icon-student {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F97316;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
 
-.door-image-right {
-    object-position: -100% 0;
+.icon-company {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3B82F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
 }
