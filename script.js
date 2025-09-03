@@ -58,43 +58,52 @@ function startHeroAnimation() {
 
     // アニメーションのシーケンス
     setTimeout(() => {
-        // Step 1: 企業と学生がすれ違う
+        // Step 1: 企業と学生が遠い位置から互いに近づき、すれ違う
         studentIcon.style.opacity = 1;
         companyIcon.style.opacity = 1;
-        studentIcon.style.left = '65%';
-        companyIcon.style.right = '65%';
-
+        studentIcon.style.left = '80%';
+        companyIcon.style.right = '80%';
+        
+        // スレ違いの動き
         setTimeout(() => {
-            // Step 2: 企業と学生がマッチングして近づく
-            studentIcon.style.left = '48%';
-            companyIcon.style.right = '48%';
-            studentIcon.style.transform = 'translateX(-50%)';
-            companyIcon.style.transform = 'translateX(50%)';
-
+            studentIcon.style.transition = 'left 1.5s ease-in-out';
+            companyIcon.style.transition = 'right 1.5s ease-in-out';
+            studentIcon.style.left = '20%';
+            companyIcon.style.right = '20%';
+            
             setTimeout(() => {
-                // Step 3: タイトルを表示
-                studentIcon.style.opacity = 0;
-                companyIcon.style.opacity = 0;
-                titleText.style.opacity = 1;
+                // Step 2: マッチングして中心に寄る
+                studentIcon.style.transition = 'left 1s ease-in-out, transform 1s ease-in-out';
+                companyIcon.style.transition = 'right 1s ease-in-out, transform 1s ease-in-out';
+                studentIcon.style.left = '48%';
+                companyIcon.style.right = '48%';
+                studentIcon.style.transform = 'translateX(-50%)';
+                companyIcon.style.transform = 'translateX(50%)';
 
                 setTimeout(() => {
-                    // Step 4: ドアが開く
-                    doorLeft.style.transform = 'translateX(-100%)';
-                    doorRight.style.transform = 'translateX(100%)';
-                    titleText.style.opacity = 0;
+                    // Step 3: タイトルを表示
+                    studentIcon.style.opacity = 0;
+                    companyIcon.style.opacity = 0;
+                    titleText.style.opacity = 1;
 
-                    // Step 5: メインコンテンツを表示
                     setTimeout(() => {
-                        loadingScreen.style.opacity = 0;
-                        loadingScreen.style.visibility = 'hidden';
-                        mainContent.style.opacity = 1;
-                        document.body.style.overflow = 'auto'; // スクロールを許可
-                    }, 1000); // ドアが開くアニメーション時間
-                }, 1500); // タイトル表示時間
-            }, 1000); // マッチングアニメーション時間
+                        // Step 4: ドアが開く
+                        doorLeft.style.transform = 'translateX(-100%)';
+                        doorRight.style.transform = 'translateX(100%)';
+                        titleText.style.opacity = 0;
 
-        }, 1500); // すれ違いアニメーション時間
+                        // Step 5: メインコンテンツを表示
+                        setTimeout(() => {
+                            loadingScreen.style.opacity = 0;
+                            loadingScreen.style.visibility = 'hidden';
+                            mainContent.style.opacity = 1;
+                            document.body.style.overflow = 'auto'; // スクロールを許可
+                        }, 1000); // ドアが開くアニメーション時間
+                    }, 1500); // タイトル表示時間
+                }, 1000); // マッチングアニメーション時間
+            }, 1500); // すれ違いアニメーション時間
 
+        }, 500); // 初期遅延
     }, 500); // 初期遅延
 }
 
