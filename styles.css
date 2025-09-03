@@ -1,1 +1,58 @@
+/*
+ * 声キャン！ウェブサイトのカスタムスタイル
+ * Tailwind CSSのユーティリティクラスでは表現できない要素を定義
+ */
 
+/* body要素のフォントと色 */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+/* スクロール時にヘッダーに付与される影 */
+.header-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* ファーストビューの背景グラデーション */
+.hero-gradient {
+    background: linear-gradient(to right, #F97316, #3B82F6);
+}
+
+/* CTAボタンのホバーエフェクト */
+.cta-button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* アニメーション用アイコンのスタイル */
+.icon-student,
+.icon-company {
+    transition: all 1s ease-in-out;
+}
+
+.icon-student {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F97316;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.icon-company {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #3B82F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
