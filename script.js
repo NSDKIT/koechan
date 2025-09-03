@@ -24,11 +24,14 @@ mobileMenuButton.addEventListener('click', () => {
 function startHeroAnimation() {
     const studentIcon = document.getElementById('student-icon');
     const companyIcon = document.getElementById('company-icon');
-    const heroContent = document.querySelector('.container.mx-auto.px-4.relative');
+    const titleText = document.getElementById('title-text');
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    const doorLeft = document.getElementById('door-left');
+    const doorRight = document.getElementById('door-right');
 
     // 初期状態を非表示にする
-    heroContent.style.opacity = 0;
-    heroContent.style.transform = 'translateY(20px)';
+    mainContent.style.opacity = 0;
     
     // SVGアイコンを生成
     function createIcon(dPath) {
@@ -69,26 +72,31 @@ function startHeroAnimation() {
             companyIcon.style.transform = 'translateX(50%)';
 
             setTimeout(() => {
-                // Step 3: コンテンツを表示
-                heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
-                heroContent.style.opacity = 1;
-                heroContent.style.transform = 'translateY(0)';
+                // Step 3: タイトルを表示
                 studentIcon.style.opacity = 0;
                 companyIcon.style.opacity = 0;
-            }, 1000);
+                titleText.style.opacity = 1;
 
-        }, 1500);
+                setTimeout(() => {
+                    // Step 4: ドアが開く
+                    doorLeft.style.transform = 'translateX(-100%)';
+                    doorRight.style.transform = 'translateX(100%)';
+                    titleText.style.opacity = 0;
 
-    }, 500);
+                    // Step 5: メインコンテンツを表示
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = 0;
+                        loadingScreen.style.visibility = 'hidden';
+                        mainContent.style.opacity = 1;
+                        document.body.style.overflow = 'auto'; // スクロールを許可
+                    }, 1000); // ドアが開くアニメーション時間
+                }, 1500); // タイトル表示時間
+            }, 1000); // マッチングアニメーション時間
+
+        }, 1500); // すれ違いアニメーション時間
+
+    }, 500); // 初期遅延
 }
 
 // ページ読み込み完了後にアニメーションを開始
-window.addEventListener('DOMContentLoaded', startHeroAnimation);
-
-// ページのリロード時にもアニメーションが再開されるように、'pageshow'イベントを追加
-window.addEventListener('pageshow', (event) => {
-    // ページがキャッシュから復元された場合 (bfcache)
-    if (event.persisted) {
-        startHeroAnimation();
-    }
-});
+window.addEventListener('load', startHeroAnimation);
