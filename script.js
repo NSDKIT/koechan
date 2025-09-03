@@ -1,0 +1,94 @@
+// ヘッダーにスクロールイベントを追加して影を付ける
+window.addEventListener('scroll', function () {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+        header.classList.add('header-shadow');
+    } else {
+        header.classList.remove('header-shadow');
+    }
+});
+
+// モバイルメニューの開閉を制御
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+mobileMenuButton.addEventListener('click', () => {
+    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+    mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('-translate-y-full');
+    mobileMenu.classList.toggle('translate-y-0');
+});
+
+// ヒーローセクションのアニメーション
+function startHeroAnimation() {
+    const studentIcon = document.getElementById('student-icon');
+    const companyIcon = document.getElementById('company-icon');
+    const heroContent = document.querySelector('.container.mx-auto.px-4.relative');
+
+    // 初期状態を非表示にする
+    heroContent.style.opacity = 0;
+    heroContent.style.transform = 'translateY(20px)';
+    
+    // SVGアイコンを生成
+    function createIcon(dPath) {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('class', 'w-10 h-10 text-white');
+        svg.setAttribute('fill', 'currentColor');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', dPath);
+        svg.appendChild(path);
+        return svg;
+    }
+
+    const studentPath = "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z";
+    const companyPath = "M12 2L2 22h20L12 2zM12 6.5l8 15H4l8-15z"; // Placeholder for a building icon
+    
+    // アイコンがまだなければ生成
+    if (!studentIcon.querySelector('svg')) {
+        studentIcon.appendChild(createIcon(studentPath));
+    }
+    if (!companyIcon.querySelector('svg')) {
+        companyIcon.appendChild(createIcon(companyPath));
+    }
+
+    // アニメーションのシーケンス
+    setTimeout(() => {
+        // Step 1: 企業と学生がすれ違う
+        studentIcon.style.opacity = 1;
+        companyIcon.style.opacity = 1;
+        studentIcon.style.left = '65%';
+        companyIcon.style.right = '65%';
+
+        setTimeout(() => {
+            // Step 2: 企業と学生がマッチングして近づく
+            studentIcon.style.left = '48%';
+            companyIcon.style.right = '48%';
+            studentIcon.style.transform = 'translateX(-50%)';
+            companyIcon.style.transform = 'translateX(50%)';
+
+            setTimeout(() => {
+                // Step 3: コンテンツを表示
+                heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
+                heroContent.style.opacity = 1;
+                heroContent.style.transform = 'translateY(0)';
+                studentIcon.style.opacity = 0;
+                companyIcon.style.opacity = 0;
+            }, 1000);
+
+        }, 1500);
+
+    }, 500);
+}
+
+// ページ読み込み完了後にアニメーションを開始
+window.addEventListener('DOMContentLoaded', startHeroAnimation);
+
+// ページのリロード時にもアニメーションが再開されるように、'pageshow'イベントを追加
+window.addEventListener('pageshow', (event) => {
+    // ページがキャッシュから復元された場合 (bfcache)
+    if (event.persisted) {
+        startHeroAnimation();
+    }
+});
