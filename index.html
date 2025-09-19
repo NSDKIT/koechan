@@ -1,350 +1,1907 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>声キャン！ - 学生の声で、採用をもっと届く形に。</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS を読み込み -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- カスタムCSSファイルを読み込み -->
-    <link rel="stylesheet" href="styles.css">
+    <title>声キャン！ - 就活×ポイ活アプリ</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* ヘッダー */
+        .header {
+            background: white;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FF6B35;
+        }
+        
+        .header-cta {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* メインセクション */
+        .main-section {
+            background: #ffe1c1;
+            padding: 70px 20px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* メインビジュアル */
+        .hero-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            margin-bottom: 30px;
+            animation: heroImageFadeIn 1.2s ease-out;
+        }
+        
+        /* デフォルトではPC版画像を表示、モバイル版画像を非表示 */
+        .hero-image-desktop {
+            display: block;
+        }
+        
+        .hero-image-mobile {
+            display: none;
+        }
+        
+        /* タブレット・モバイル端末では画像を切り替え */
+        @media (max-width: 1024px) {
+            .main-section {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            
+            .hero-image-desktop {
+                display: none;
+            }
+            
+            .hero-image-mobile {
+                display: block;
+                max-width: none;
+                max-height: none;
+                width: 100vw;
+                height: auto;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+        
+        @keyframes heroImageFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* 実績カードコンテナ */
+        .achievements-container {
+            display: grid;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+        }
+        
+        /* PC向け：横並び3列レイアウト */
+        @media (min-width: 1024px) {
+            .achievements-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 25px;
+                max-width: 800px;
+            }
+        }
+        
+        /* 実績カード */
+        .achievement-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.25);
+        }
+        
+        /* 重要：各カードに同じ横幅を設定 */
+        .achievement-card:nth-child(1) {
+            /* 上のカードを2列目の中央に配置、下の2つと同じサイズ */
+            grid-column: 1 / span 2;
+            justify-self: center;
+            width: calc((100% - 15px) / 2);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+        
+        .achievement-card:nth-child(2) {
+            grid-column: 1;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+        
+        .achievement-card:nth-child(3) {
+            grid-column: 2;
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+        }
+        
+        /* PC向け：横並び時の個別設定リセット */
+        @media (min-width: 1024px) {
+            .achievement-card:nth-child(1),
+            .achievement-card:nth-child(2), 
+            .achievement-card:nth-child(3) {
+                grid-column: unset;
+                justify-self: unset;
+                width: 100%;
+                flex: 1;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+
+        
+        .achievement-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .achievement-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #FF6B35;
+        }
+        
+        /* より小さな画面での調整 */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 18px;
+            }
+            
+            .header-cta {
+                font-size: 11px;
+                padding: 8px 12px;
+            }
+            
+            .hero-image {
+                max-height: 160px;
+            }
+            
+            .achievements-container {
+                max-width: 350px;
+                gap: 12px;
+            }
+            
+            .achievement-card {
+                height: 110px;
+                padding: 15px;
+            }
+            
+            /* より小さな画面でも同じ横幅制限を適用 */
+            .achievement-card:nth-child(1) {
+                width: calc((100% - 12px) / 2);
+            }
+        }
+        
+        /* PC向けの設定を小画面では無効化 */
+        @media (max-width: 1023px) {
+            .achievements-container {
+                display: grid !important;
+            }
+            
+            .achievement-title {
+                font-size: 12px;
+            }
+            
+            .achievement-number {
+                font-size: 18px;
+            }
+        }
+        
+        /* カウントアップアニメーション */
+        .countup {
+            display: inline-block;
+        }
+        
+        /* 心が動くメッセージセクション */
+        .inspiring-section {
+            background: linear-gradient(135deg, #FFEDE0 0%, #FFFFFF 100%);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .inspiring-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .inspiring-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 60px;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .title-main {
+            color: #CC5500;
+            font-size: 28px;
+            line-height: 1.3;
+        }
+        
+        .title-sub {
+            color: #CC5500;
+            font-size: 26px;
+            line-height: 1.3;
+        }
+        
+        .title-highlight {
+            color: #FF6B35;
+            font-size: 28px;
+            text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.3);
+            line-height: 1.3;
+        }
+        
+        /* イントロ画像コンテナ */
+        .intro-image-container {
+            position: relative;
+            margin: 60px auto;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .intro-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .intro-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.15);
+        }
+        
+
+        
+        /* メッセージ部分 */
+        .inspiring-message {
+            margin-top: 40px;
+        }
+        
+        .message-subtitle {
+            color: #FF6B35;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .message-main {
+            color: #CC5500;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .message-highlight {
+            color: #FF6B35;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        .message-quality {
+            color: #CC5500;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(204, 85, 0, 0.3);
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 767px) {
+            .inspiring-section {
+                padding: 60px 20px;
+            }
+            
+            .inspiring-title {
+                font-size: 24px;
+                margin-bottom: 40px;
+            }
+            
+            .title-main {
+                font-size: 22px;
+                line-height: 1.3;
+            }
+            
+            .title-sub {
+                font-size: 20px;
+                line-height: 1.3;
+            }
+            
+            .title-highlight {
+                font-size: 22px;
+                line-height: 1.3;
+            }
+            
+            .intro-image-container {
+                margin: 40px auto;
+                max-width: 350px;
+            }
+            
+            .intro-image {
+                border-radius: 10px;
+            }
+            
+            .message-main {
+                font-size: 20px;
+            }
+            
+            .message-quality {
+                font-size: 24px;
+            }
+        }
+        
+        /* 機能説明セクション */
+        .flow-section {
+            background: #FFF5F0;
+            padding: 80px 20px;
+        }
+        
+        .features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .features-title {
+            color: #CC5500;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        
+        .flow-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .flow-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .flow-subtitle {
+            color: #FF6B35;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .flow-title {
+            color: #CC5500;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        
+        .title-quality {
+            color: #CC5500;
+            font-size: 32px;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        /* フローステップ */
+        .flow-step {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .step-badge {
+            background: #FF8C42;
+            color: white;
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
+            z-index: 10;
+        }
+        
+        .step-number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .step-label {
+            font-size: 11px;
+            margin-top: -5px;
+        }
+        
+        .step-content {
+            display: flex;
+            align-items: center;
+            padding: 40px 40px 40px 100px;
+            gap: 40px;
+        }
+        
+        .step-text {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .highlight-orange {
+            color: #FF6B35;
+            font-weight: bold;
+        }
+        
+        .step-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .step-note {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .step-result {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .result-text {
+            color: #666;
+        }
+        
+        .result-number {
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .result-note {
+            color: #FF6B35;
+            font-size: 14px;
+        }
+        
+        /* イラスト部分 */
+        .step-illustration {
+            flex-shrink: 0;
+            width: 300px;
+            height: 200px;
+            position: relative;
+        }
+        
+        /* ステップ1: 相談シーン */
+        .consultation-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .interviewer, .interviewee {
+            position: relative;
+        }
+        
+        .person-head {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+        
+        .interviewer-head {
+            background: #FDBCB4;
+        }
+        
+        .interviewee-head {
+            background: #F4C2A1;
+            position: relative;
+        }
+        
+        .glasses {
+            position: absolute;
+            top: 12px;
+            left: 6px;
+            width: 28px;
+            height: 10px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            background: transparent;
+        }
+        
+        .glasses::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 11px;
+            width: 4px;
+            height: 2px;
+            background: #333;
+        }
+        
+        .person-body {
+            width: 50px;
+            height: 60px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .interviewer-body {
+            background: #666;
+        }
+        
+        .interviewee-body {
+            background: #CC5500;
+        }
+        
+        .table {
+            width: 80px;
+            height: 10px;
+            background: #DDD;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        
+        .lightbulb {
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 20px;
+        }
+        
+        /* ステップ2: 企業紹介シーン */
+        .company-introduction {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .advisor {
+            position: relative;
+        }
+        
+        .advisor-head {
+            background: #FDBCB4;
+        }
+        
+        .advisor-body {
+            background: #666;
+        }
+        
+        .documents {
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 30px;
+            height: 20px;
+            background: white;
+            border: 1px solid #DDD;
+            border-radius: 2px;
+        }
+        
+        .building {
+            position: relative;
+        }
+        
+        .building-main {
+            width: 60px;
+            height: 80px;
+            background: #FF8C42;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .building-windows {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    white 0px, white 2px,
+                    transparent 2px, transparent 8px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    white 0px, white 2px,
+                    transparent 2px, transparent 8px
+                );
+        }
+        
+        .candidate {
+            position: relative;
+        }
+        
+        .candidate-head {
+            background: #F4C2A1;
+        }
+        
+        .candidate-body {
+            background: #CC5500;
+        }
+        
+        .sparkle-effect {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 16px;
+            animation: sparkleAnimation 1.5s infinite;
+        }
+        
+        /* ステップ3: 成功シーン */
+        .success-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-card {
+            background: white;
+            border: 2px solid #DDD;
+            border-radius: 10px;
+            padding: 10px;
+            width: 80px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .profile-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F4C2A1;
+            margin: 0 auto 5px;
+        }
+        
+        .person-mini {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #CC5500;
+            margin-top: 20px;
+        }
+        
+        .rating-stars {
+            color: #FFD700;
+            font-size: 12px;
+        }
+        
+        .arrow-down {
+            font-size: 20px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .companies-grid {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .company-option {
+            width: 40px;
+            height: 50px;
+            background: #FF8C42;
+            border-radius: 3px;
+        }
+        
+        .success-advisor {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        
+        .success-head {
+            background: #FDBCB4;
+        }
+        
+        .success-body {
+            background: #666;
+        }
+        
+        .pointing-finger {
+            position: absolute;
+            top: 20px;
+            right: -25px;
+            font-size: 20px;
+        }
+        
+        /* サポート画像のスタイル */
+        .support-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .support-image:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.15);
+        }
+        
+        /* ポイ活画像の特別スタイル */
+        .bonus-image {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, #FFF8DC, #FFFFFF);
+            padding: 10px;
+        }
+        
+        .bonus-image:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+
+        
+        /* おまけ機能のスタイル */
+        .bonus-feature {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, #FFF8DC, #FFFFFF);
+        }
+        
+        .bonus-badge {
+            background: #FFD700;
+            color: #CC5500;
+            font-weight: bold;
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 767px) {
+            .flow-section {
+                padding: 60px 20px;
+            }
+            
+            .flow-title {
+                font-size: 22px;
+            }
+            
+            .title-quality {
+                font-size: 26px;
+            }
+            
+            .step-content {
+                flex-direction: column;
+                padding: 60px 20px 30px;
+                text-align: center;
+            }
+            
+            .step-badge {
+                position: static;
+                margin: -30px auto 20px;
+            }
+            
+            .step-illustration {
+                width: 250px;
+                height: 150px;
+                margin: 20px auto 0;
+            }
+            
+            .support-image {
+                max-width: 220px;
+                border-radius: 8px;
+            }
+            
+            .step-title {
+                font-size: 20px;
+            }
+            
+            .step-description {
+                font-size: 14px;
+            }
+        }
+        
+        /* まずは参加してみるCTAセクション */
+        .join-cta-section {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .join-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        
+        .join-cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .join-cta-title {
+            color: white;
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .join-cta-subtitle {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+        
+        .join-cta-button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .join-cta-button {
+            background: white;
+            color: #FF6B35;
+            text-decoration: none;
+            padding: 20px 60px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .join-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .join-cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .join-cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            background: #FFF8F5;
+        }
+        
+        .button-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .button-arrow {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .join-cta-button:hover .button-arrow {
+            transform: translateX(5px);
+        }
+        
+        .join-cta-note {
+            color: white;
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 767px) {
+            .join-cta-section {
+                padding: 80px 20px;
+            }
+            
+            .join-cta-title {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+            
+            .join-cta-subtitle {
+                font-size: 18px;
+                margin-bottom: 40px;
+            }
+            
+            .join-cta-button {
+                padding: 18px 40px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .join-cta-title {
+                font-size: 28px;
+            }
+            
+            .join-cta-subtitle {
+                font-size: 16px;
+            }
+            
+            .join-cta-button {
+                padding: 16px 35px;
+                font-size: 18px;
+            }
+        }
+        
+        /* PC向け大画面対応 */
+        @media (min-width: 1024px) {
+            /* ヘッダーの最適化 */
+            .header {
+                padding: 15px 40px;
+                height: 80px;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .header-cta {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+            
+            /* メインセクションの最適化 */
+            .main-section {
+                padding: 100px 40px 40px;
+            }
+            
+            .hero-image {
+                max-width: 900px;
+                max-height: 450px;
+            }
+            
+            .achievements-container {
+                max-width: 600px;
+                gap: 25px;
+            }
+            
+            .achievement-card {
+                height: 140px;
+                padding: 30px;
+            }
+            
+            .achievement-card:nth-child(1),
+            .achievement-card:nth-child(2),
+            .achievement-card:nth-child(3) {
+                flex: 1;
+                width: 100%;
+            }
+            
+            .achievement-title {
+                font-size: 16px;
+            }
+            
+            .achievement-number {
+                font-size: 24px;
+            }
+            
+            /* 心が動くメッセージセクション */
+            .inspiring-section {
+                padding: 100px 40px;
+            }
+            
+            .inspiring-title {
+                font-size: 30px;
+                margin-bottom: 80px;
+                line-height: 1.3;
+            }
+            
+            .title-main {
+                font-size: 32px;
+                line-height: 1.3;
+            }
+            
+            .title-sub {
+                font-size: 30px;
+                line-height: 1.3;
+            }
+            
+            .title-highlight {
+                font-size: 32px;
+                line-height: 1.3;
+            }
+            
+            .intro-image-container {
+                margin: 80px auto;
+                max-width: 800px;
+            }
+            
+            .intro-image {
+                border-radius: 20px;
+            }
+            
+            .message-main {
+                font-size: 32px;
+            }
+            
+            .message-quality {
+                font-size: 36px;
+            }
+            
+            /* 機能説明セクション */
+            .flow-section {
+                padding: 100px 40px;
+            }
+            
+            .features-title {
+                font-size: 48px;
+                margin-bottom: 80px;
+            }
+            
+            .step-content {
+                padding: 50px 60px 50px 120px;
+                gap: 60px;
+            }
+            
+            .step-badge {
+                width: 100px;
+                height: 100px;
+                left: -15px;
+            }
+            
+            .step-number {
+                font-size: 42px;
+            }
+            
+            .step-label {
+                font-size: 14px;
+            }
+            
+            .step-title {
+                font-size: 32px;
+            }
+            
+            .step-description {
+                font-size: 18px;
+            }
+            
+            .step-illustration {
+                width: 400px;
+                height: 250px;
+            }
+            
+            .support-image {
+                max-width: 350px;
+                border-radius: 15px;
+            }
+            
+            /* CTAセクション */
+            .join-cta-section {
+                padding: 120px 40px;
+            }
+            
+            .join-cta-title {
+                font-size: 54px;
+                margin-bottom: 35px;
+            }
+            
+            .join-cta-subtitle {
+                font-size: 24px;
+                margin-bottom: 60px;
+            }
+            
+            .join-cta-button {
+                padding: 25px 80px;
+                font-size: 26px;
+                gap: 20px;
+            }
+            
+            /* Q&Aセクション */
+            .qa-section {
+                padding: 100px 40px;
+            }
+            
+            .qa-container {
+                max-width: 1000px;
+            }
+            
+            .qa-title {
+                font-size: 48px;
+                margin-bottom: 70px;
+            }
+            
+            .qa-item {
+                margin-bottom: 30px;
+            }
+            
+            .qa-question {
+                padding: 35px 40px;
+                gap: 20px;
+            }
+            
+            .qa-item.active .qa-answer {
+                padding: 35px 40px;
+                max-height: 300px;
+            }
+            
+            .qa-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .qa-text {
+                font-size: 18px;
+            }
+            
+            .qa-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            /* 超大画面向け追加最適化 */
+            .main-section,
+            .inspiring-section,
+            .flow-section,
+            .join-cta-section,
+            .qa-section {
+                padding-left: 80px;
+                padding-right: 80px;
+            }
+            
+            .inspiring-content,
+            .flow-container,
+            .join-cta-container,
+            .qa-container {
+                max-width: 1200px;
+            }
+            
+            .hero-image {
+                max-width: 1100px;
+                max-height: 550px;
+            }
+            
+            .achievements-container {
+                max-width: 800px;
+            }
+        }
+
+        /* Q&A セクション */
+        .qa-section {
+            background: #F8F9FA;
+            padding: 80px 20px;
+        }
+        
+        .qa-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .qa-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 50px;
+        }
+        
+        .qa-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .qa-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .qa-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .qa-question {
+            padding: 25px 30px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .qa-question:hover {
+            background: #FFF8F5;
+            border-bottom-color: #FF6B35;
+        }
+        
+        .qa-item.active .qa-question {
+            background: #FF6B35;
+            color: white;
+            border-bottom-color: #FF6B35;
+        }
+        
+        .qa-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: #FAFAFA;
+        }
+        
+        .qa-item.active .qa-answer {
+            padding: 25px 30px;
+            max-height: 200px;
+        }
+        
+        .qa-icon {
+            background: #FF6B35;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .qa-item.active .qa-question .qa-icon {
+            background: white;
+            color: #FF6B35;
+        }
+        
+        .qa-answer .qa-icon {
+            background: #CC5500;
+        }
+        
+        .qa-text {
+            flex: 1;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .qa-answer .qa-text {
+            color: #555;
+            font-weight: normal;
+        }
+        
+        .qa-toggle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #E9ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .qa-item.active .qa-toggle {
+            background: white;
+            color: #FF6B35;
+            transform: rotate(45deg);
+        }
+        
+        .qa-question:hover .qa-toggle {
+            background: #FF6B35;
+            color: white;
+        }
+        
+        .qa-item.active .qa-question:hover .qa-toggle {
+            background: white;
+            color: #FF6B35;
+        }
+        
+        /* モバイル対応 */
+        @media (max-width: 767px) {
+            .qa-section {
+                padding: 60px 20px;
+            }
+            
+            .qa-title {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+            
+            .qa-question {
+                padding: 20px;
+                gap: 12px;
+            }
+            
+            .qa-item.active .qa-answer {
+                padding: 20px;
+                max-height: 250px;
+            }
+            
+            .qa-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            
+            .qa-text {
+                font-size: 14px;
+            }
+            
+            .qa-toggle {
+                width: 25px;
+                height: 25px;
+                font-size: 18px;
+            }
+        }
+        
+        /* 極小画面（320px以下）での調整 */
+        @media (max-width: 320px) {
+            .inspiring-title {
+                font-size: 20px;
+                margin-bottom: 30px;
+                line-height: 1.2;
+            }
+            
+            .title-main {
+                font-size: 18px;
+                line-height: 1.2;
+            }
+            
+            .title-sub {
+                font-size: 17px;
+                line-height: 1.2;
+            }
+            
+            .title-highlight {
+                font-size: 18px;
+                line-height: 1.2;
+            }
+        }
+        
+        /* 中間画面サイズ（321px-480px）での調整 */
+        @media (min-width: 321px) and (max-width: 480px) {
+            .inspiring-title {
+                font-size: 22px;
+                line-height: 1.25;
+            }
+            
+            .title-main {
+                font-size: 20px;
+                line-height: 1.25;
+            }
+            
+            .title-sub {
+                font-size: 19px;
+                line-height: 1.25;
+            }
+            
+            .title-highlight {
+                font-size: 20px;
+                line-height: 1.25;
+            }
+        }
+        
+        
+        /* フッター */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+    </style>
 </head>
-
-<body class="bg-gray-50 overflow-hidden">
-
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-1000">
-        <div class="relative w-full h-full">
-            <!-- Animation Elements -->
-            <div id="animation-container" class="absolute inset-0 z-0 flex items-center justify-center">
-                <div id="student-icon" class="icon-student absolute top-1/2 left-1/4 transform -translate-y-1/2 opacity-0"></div>
-                <div id="company-icon" class="icon-company absolute top-1/2 right-1/4 transform -translate-y-1/2 opacity-0"></div>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="logo">声キャン！</div>
+        <button class="header-cta">無料ダウンロード</button>
+    </header>
+    
+    <!-- メインセクション -->
+    <section class="main-section">
+        <!-- メインビジュアル -->
+        <!-- PC版表示用画像 -->
+        <img src="https://page.gensparksite.com/v1/base64_upload/ff9475b75b21edfc41e951cd703f75c7" 
+             alt="JOB HUNTING MADE FUN, POINT SAVING MADE EASY" 
+             class="hero-image hero-image-desktop">
+        
+        <!-- モバイル版表示用画像 -->
+        <img src="https://page.gensparksite.com/v1/base64_upload/9f92d3d1d6f3796153225b287523e04e" 
+             alt="JOB HUNTING MADE FUN - 声キャン！就活×ポイ活アプリ" 
+             class="hero-image hero-image-mobile">
+        
+        <!-- 実績カード -->
+        <div class="achievements-container">
+            <div class="achievement-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="achievement-title">利用者満足度</div>
+                <div class="achievement-number">
+                    <span class="countup" data-target="98.5">0</span>%
+                </div>
             </div>
-            <!-- Title -->
-            <div id="title-text" class="absolute inset-0 flex items-center justify-center text-3xl md:text-5xl lg:text-6xl font-extrabold text-blue-500 opacity-0 transition-opacity duration-1000">
-                声キャン！
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="achievement-title">マッチング成功数</div>
+                <div class="achievement-number">
+                    <span class="countup" data-target="10000">0</span>件以上
+                </div>
             </div>
-            <!-- Door Opening Effect -->
-            <div id="door-left" class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 transform origin-left transition-transform duration-1000 ease-in-out"></div>
-            <div id="door-right" class="absolute top-0 right-0 w-1/2 h-full bg-orange-500 transform origin-right transition-transform duration-1000 ease-in-out"></div>
+            
+            <div class="achievement-card" data-aos="fade-up" data-aos-delay="900">
+                <div class="achievement-title">累計ポイント還元</div>
+                <div class="achievement-number">
+                    <span class="countup" data-target="50">0</span>億ポイント
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+    
+    
+    <!-- 心が動くメッセージセクション -->
+    <section class="inspiring-section">
+        <div class="inspiring-content">
+            <h2 class="inspiring-title">
+                <span class="title-main">就活の迷子から卒業。</span><br>
+                <span class="title-sub">声キャン！が、あなたにフィットする</span><br>
+                <span class="title-highlight">企業との出会いをつくる。</span>
+            </h2>
+            
+            <div class="intro-image-container">
+                <img src="https://careerticket.jp/img/pc/lp/340/intro.webp" 
+                     alt="声キャン！サービス紹介" 
+                     class="intro-image"
+                     data-aos="fade-up">
+            </div>
+            
+            <div class="inspiring-message">
+                <p class="message-subtitle">その秘密は…</p>
+                <p class="message-main">
+                    <span class="message-highlight">あなたの声</span>を企業に届けて、<span class="message-highlight">ミスマッチをなくす</span>仕組み。
+                </p>
+                <p class="message-quality">声キャン！が、量より質の就活を実現する。</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- アプリの流れ説明セクション -->
+    <section class="flow-section">
+        <div class="flow-container">
 
-    <!-- Main Content -->
-    <div id="main-content" class="opacity-0 transition-opacity duration-1000">
-        <!-- Header -->
-        <header id="header" class="fixed top-0 left-0 w-full z-40 bg-white transition-shadow duration-300">
-            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <!-- Logo -->
-                <a href="#" class="flex-shrink-0">
-                    <img src="https://placehold.co/120x40/F97316/ffffff?text=声キャン！ロゴ" alt="声キャン！ロゴ"
-                        class="h-10 w-auto rounded-md" onerror="this.src='https://placehold.co/120x40/F97316/ffffff?text=声キャン！ロゴ'">
+            
+            <div class="features-header">
+                <h2 class="features-title" data-aos="fade-up">声キャン！でできること</h2>
+            </div>
+            
+            <!-- 機能1 -->
+            <div class="flow-step" data-aos="fade-up">
+                <div class="step-badge">
+                    <span class="step-number">1</span>
+                    <span class="step-label">機能</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-text">
+                        <h3 class="step-title">
+                            <span class="highlight-orange">ホンネを答える</span>だけ
+                        </h3>
+                        <p class="step-description">
+                            就活や企業に対するリアルな声を、気軽に共有できる。
+                        </p>
+                    </div>
+                    <div class="step-illustration">
+                        <img src="https://careerticket.jp/img/pc/lp/340/support-1.webp" 
+                             alt="ホンネを答えるだけ" 
+                             class="support-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 機能2 -->
+            <div class="flow-step" data-aos="fade-up" data-aos-delay="200">
+                <div class="step-badge">
+                    <span class="step-number">2</span>
+                    <span class="step-label">機能</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-text">
+                        <h3 class="step-title">
+                            <span class="highlight-orange">就活を全力で応援</span>
+                        </h3>
+                        <p class="step-description">
+                            集まった声をもとに、企業が情報を改善。就活の不安や疑問がどんどん解消されていく。
+                        </p>
+                    </div>
+                    <div class="step-illustration">
+                        <img src="https://careerticket.jp/img/pc/lp/340/support-2.webp" 
+                             alt="就活を全力で応援" 
+                             class="support-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 機能3 -->
+            <div class="flow-step" data-aos="fade-up" data-aos-delay="400">
+                <div class="step-badge">
+                    <span class="step-number">3</span>
+                    <span class="step-label">機能</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-text">
+                        <h3 class="step-title">
+                            <span class="highlight-orange">最新の就活情報</span>をゲット
+                        </h3>
+                        <p class="step-description">
+                            企業からの発信が"学生目線"にアップデートされて届くから、欲しい情報が手に入る。
+                        </p>
+                    </div>
+                    <div class="step-illustration">
+                        <img src="https://careerticket.jp/img/pc/lp/340/support-3.webp" 
+                             alt="最新の就活情報をゲット" 
+                             class="support-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- おまけ機能 -->
+            <div class="flow-step bonus-feature" data-aos="fade-up" data-aos-delay="600">
+                <div class="step-badge bonus-badge">
+                    <span class="step-number">+</span>
+                    <span class="step-label">おまけ</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-text">
+                        <h3 class="step-title">
+                            <span class="highlight-orange">ポイ活もできる</span>！
+                        </h3>
+                        <p class="step-description">
+                            アンケートに答えるだけでポイントが貯まる。就活しながらちょっと得できる！
+                        </p>
+                    </div>
+                    <div class="step-illustration">
+                        <img src="https://thumb.ac-illust.com/85/858a397ac3d3c93b2fcf019b08022682_w.jpeg" 
+                             alt="ポイ活もできる！" 
+                             class="support-image bonus-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- まずは参加してみるCTAセクション -->
+    <section class="join-cta-section">
+        <div class="join-cta-container">
+            <h2 class="join-cta-title" data-aos="fade-up">
+                効率的な就活×お得なポイ活を<br>
+                今すぐ体験しよう！
+            </h2>
+            <p class="join-cta-subtitle" data-aos="fade-up" data-aos-delay="200">
+                声キャン！アプリで、あなたの理想の就活を始めませんか？
+            </p>
+            <div class="join-cta-button-container" data-aos="fade-up" data-aos-delay="400">
+                <!-- 外部リンクURL変更はこちら -->
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="join-cta-button">
+                    <span class="button-text">まずは参加してみる！</span>
+                    <span class="button-arrow">→</span>
                 </a>
-                <!-- Navigation -->
-                <nav class="hidden md:flex space-x-6 lg:space-x-8 items-center">
-                    <a href="#services" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">サービス紹介</a>
-                    <a href="#for-students" class="text-gray-700 hover:text-orange-500 font-medium transition-colors">学生の方へ</a>
-                    <a href="#for-companies" class="text-gray-700 hover:text-blue-500 font-medium transition-colors">企業の方へ</a>
-                    <a href="#cases" class="text-gray-700 hover:text-gray-500 font-medium transition-colors">導入事例</a>
-                    <a href="#faq" class="text-gray-700 hover:text-gray-500 font-medium transition-colors">FAQ</a>
-                    <a href="#contact"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105">お問い合わせ</a>
-                </nav>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-                        </path>
-                    </svg>
-                </button>
+                <p class="join-cta-note">※外部サイトに移動します</p>
             </div>
-            <!-- Mobile Menu -->
-            <div id="mobile-menu"
-                class="hidden md:hidden bg-white w-full text-center py-4 transition-all duration-300 ease-in-out transform -translate-y-full">
-                <div class="flex flex-col space-y-4">
-                    <a href="#services" class="text-gray-700 hover:text-blue-500 font-medium">サービス紹介</a>
-                    <a href="#for-students" class="text-gray-700 hover:text-orange-500 font-medium">学生の方へ</a>
-                    <a href="#for-companies" class="text-gray-700 hover:text-blue-500 font-medium">企業の方へ</a>
-                    <a href="#cases" class="text-gray-700 hover:text-gray-500 font-medium">導入事例</a>
-                    <a href="#faq" class="text-gray-700 hover:text-gray-500 font-medium">FAQ</a>
-                    <a href="#contact"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full shadow-lg mx-4">お問い合わせ</a>
-                </div>
-            </div>
-        </header>
+        </div>
+    </section>
     
-        <!-- Main Content -->
-        <main>
-            <!-- Hero Section -->
-            <section class="hero-gradient text-white text-center py-20 md:py-32 rounded-b-3xl">
-                <div class="container mx-auto px-4">
-                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4 animate-fade-in-up">
-                        学生の“声”が、<br class="md:hidden">次の一手になる。
-                    </h1>
-                    <p class="text-lg md:text-xl lg:text-2xl font-light mb-8 animate-fade-in-up delay-200">
-                        学生のホンネを聞き、企業の魅力最大化。<br>声キャン!は”イマ”の採用活動に革命を起こします。
-                    </p>
-                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-                        <a href="#for-companies"
-                            class="bg-white text-blue-500 font-bold py-3 px-8 rounded-full shadow-lg cta-button">企業の方はこちら</a>
-                        <a href="#for-students"
-                            class="bg-white text-orange-500 font-bold py-3 px-8 rounded-full shadow-lg cta-button">学生の方はこちら</a>
+    <!-- Q&A セクション -->
+    <section class="qa-section">
+        <div class="qa-container">
+            <h2 class="qa-title" data-aos="fade-up">よくあるご質問</h2>
+            <div class="qa-list">
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">声キャン！アプリは本当に無料で使えますか？</span>
+                        <span class="qa-toggle">+</span>
+                    </div>
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">はい、声キャン！アプリは完全無料でご利用いただけます。就活サポートもポイント獲得機能も、追加料金は一切かかりません。</span>
                     </div>
                 </div>
-            </section>
-    
-            <!-- Service Section -->
-            <section id="services" class="py-20 bg-white">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold mb-12">サービス紹介</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-                        <!-- サービス内容詳細 -->
-                        <div class="p-6 bg-gray-100 rounded-2xl shadow-lg">
-                            <h3 class="text-xl font-semibold mb-2">アンケート収集</h3>
-                            <p class="text-gray-600 text-left">
-                                声キャン! が運営する「学生限定ポイ活プラットフォーム」にて学生100人にアンケートを実施し、回答を徹底的に分析します。<br>
-                                学生の属性や就活に関する考え方とアンケート回答結果を照らし合わせて分析いたします。
-                            </p>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-2xl shadow-lg">
-                            <h3 class="text-xl font-semibold mb-2">学生への認知度UP</h3>
-                            <p class="text-gray-600 text-left">
-                                エントリー前に企業認知・関心アンケートにより高め、「学生限定ポイ活プラットフォーム」に採用情報を掲載します。<br>
-                                ただのデータ提供にとどまらない“つながる採用支援”を行います。
-                            </p>
-                        </div>
-                        <div class="p-6 bg-gray-100 rounded-2xl shadow-lg">
-                            <h3 class="text-xl font-semibold mb-2">採用戦略の見直し</h3>
-                            <p class="text-gray-600 text-left">
-                                「いつ・どこで・何をすべきか」がデータで見えるようになり、「選ばれる企業」となるためのコンセプトや訴求軸が見えます。<br>
-                                インターンシップや会社説明会で“学生が見たい・知りたい”コンテンツが分かり、戦略的な意思決定を支援します。
-                            </p>
-                        </div>
+                
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">どのようにしてポイントを貯めることができますか？</span>
+                        <span class="qa-toggle">+</span>
+                    </div>
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">企業説明会への参加、エントリーシートの提出、面接の実施など、就活活動を行うごとにポイントが自動的に貯まります。また、アプリ内のミッションクリアでも追加ポイントを獲得できます。</span>
                     </div>
                 </div>
-            </section>
-    
-            <!-- For Students Section -->
-            <section id="for-students" class="py-20 bg-orange-50 rounded-3xl mx-4 my-8 shadow-xl">
-                <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 text-center md:text-left md:pr-12">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">学生の方へ</h2>
-                        <h3 class="text-2xl font-semibold text-orange-600 mb-4">あなたの声が企業に届き、<br class="md:hidden">インターンがもっとよくなる</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            声キャン！は、あなたのインターンシップや就職活動の経験を、企業に直接届けることができるサービスです。あなたのリアルな声が、企業の採用活動をより良いものに変える力になります。
-                        </p>
-                        <a href="#faq" class="inline-block bg-orange-500 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-button">詳細を見る</a>
+                
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">貯めたポイントは何に使えますか？</span>
+                        <span class="qa-toggle">+</span>
                     </div>
-                    <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-                        <img src="https://placehold.co/400x300/fdf2f2/f97316?text=学生向けイメージ" alt="学生向けイメージ" class="rounded-2xl shadow-lg">
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">Amazonギフト券、QUOカード、電子マネー、スターバックスカードなど、様々な商品と交換可能です。また、就活に役立つ書籍やスーツレンタル券との交換もできます。</span>
                     </div>
                 </div>
-            </section>
-    
-            <!-- For Companies Section -->
-            <section id="for-companies" class="py-20 bg-blue-50 rounded-3xl mx-4 my-8 shadow-xl">
-                <div class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
-                    <div class="md:w-1/2 mt-8 md:mt-0 flex justify-center">
-                        <img src="https://placehold.co/400x300/e6f1ff/4C6EF5?text=企業向けイメージ" alt="企業向けイメージ" class="rounded-2xl shadow-lg">
+                
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">就活サポートはどのような内容ですか？</span>
+                        <span class="qa-toggle">+</span>
                     </div>
-                    <div class="md:w-1/2 text-center md:text-left md:pl-12">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">企業の方へ</h2>
-                        <h3 class="text-2xl font-semibold text-blue-600 mb-4">SNS発信・採用広報が<br class="md:hidden">“届く”形へ</h3>
-                        <p class="text-gray-600 leading-relaxed mb-6">
-                            学生のリアルな声に基づいた採用広報は、候補者の心に響き、応募率や内定承諾率の向上に繋がります。データに基づいた最適な戦略で、採用活動を成功へと導きます。
-                        </p>
-                        <a href="#contact" class="inline-block bg-blue-500 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-button">お問い合わせ</a>
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">専任アドバイザーによる1対1の面談、エントリーシートの添削、面接対策、企業研究のサポートなど、内定獲得まで包括的にサポートいたします。年間1.8万人の実績があります。</span>
                     </div>
                 </div>
-            </section>
-    
-            <!-- Pricing Section -->
-            <section id="pricing" class="py-20 bg-white">
-                <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold mb-12">料金設定</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- プラン1: 1社利用料金 -->
-                        <div class="p-8 bg-gray-100 rounded-3xl shadow-xl flex flex-col items-center">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">1社利用料金</h3>
-                            <p class="text-4xl font-extrabold text-blue-500 mb-4">
-                                10<span class="text-lg">万円</span><span class="text-base font-medium">/月</span>
-                            </p>
-                            <ul class="text-left text-gray-600 space-y-2 mb-6">
-                                <li>・1回10問（月2回まで）</li>
-                                <li>・学生100人にアンケート</li>
-                            </ul>
-                            <a href="#contact"
-                                class="mt-auto w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-button">お問い合わせ</a>
-                        </div>
-                        <!-- プラン2: バリューパック -->
-                        <div class="p-8 bg-gray-100 rounded-3xl shadow-xl flex flex-col items-center relative border-4 border-orange-500">
-                            <div class="absolute -top-4 bg-orange-500 text-white text-sm font-bold px-4 py-1 rounded-full">
-                                おすすめ
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">バリューパック</h3>
-                            <p class="text-4xl font-extrabold text-orange-500 mb-4">
-                                30<span class="text-lg">万円</span><span class="text-base font-medium">/月</span>
-                            </p>
-                            <ul class="text-left text-gray-600 space-y-2 mb-6">
-                                <li>・5社まで利用可能</li>
-                                <li>・1回10問（月2回まで）</li>
-                                <li>・学生100人にアンケート</li>
-                                <li>※就職支援企業もご利用可能</li>
-                                <li>※6社目以降は+5万円/社</li>
-                            </ul>
-                            <a href="#contact"
-                                class="mt-auto w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-button">お問い合わせ</a>
-                        </div>
-                        <!-- プラン3: 宣伝オプション -->
-                        <div class="p-8 bg-gray-100 rounded-3xl shadow-xl flex flex-col items-center">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">宣伝オプション</h3>
-                            <p class="text-4xl font-extrabold text-gray-500 mb-4">
-                                5<span class="text-lg">万円</span>
-                            </p>
-                            <ul class="text-left text-gray-600 space-y-2 mb-6">
-                                <li>・バナー1個</li>
-                                <li>・掲載期間: 3ヶ月間</li>
-                            </ul>
-                            <a href="#contact"
-                                class="mt-auto w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-full shadow-lg cta-button">お問い合わせ</a>
-                        </div>
+                
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">地方在住でも利用できますか？</span>
+                        <span class="qa-toggle">+</span>
+                    </div>
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">はい、全国どこからでもご利用いただけます。オンライン面談やビデオ通話でのサポートも充実しており、地方の学生さんも多数ご利用いただいています。</span>
                     </div>
                 </div>
-            </section>
-    
-            <!-- Case Studies Section -->
-            <section id="cases" class="py-20 bg-white">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-3xl font-bold text-center mb-12">導入事例</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Company Case -->
-                        <div class="p-8 bg-gray-100 rounded-3xl shadow-lg flex flex-col items-center text-center">
-                            <img src="https://placehold.co/100x100/eeeeee/333333?text=企業ロゴ" alt="企業ロゴ"
-                                class="rounded-full w-24 h-24 mb-6">
-                            <h3 class="text-xl font-semibold text-blue-600 mb-4">【企業名】様</h3>
-                            <p class="text-gray-600 leading-relaxed mb-4">
-                                「学生の生の声を聞くことで、私たちのSNS発信内容が劇的に改善しました。ターゲット学生からの反応も増え、採用活動がよりスムーズに進んでいます。」
-                            </p>
-                            <p class="text-gray-500 font-medium">- 採用ご担当者</p>
-                        </div>
-                        <!-- Student Comment -->
-                        <div class="p-8 bg-gray-100 rounded-3xl shadow-lg flex flex-col items-center text-center">
-                            <img src="https://placehold.co/100x100/eeeeee/333333?text=学生アバター" alt="学生アバター"
-                                class="rounded-full w-24 h-24 mb-6">
-                            <h3 class="text-xl font-semibold text-orange-600 mb-4">【学生名】さん</h3>
-                            <p class="text-gray-600 leading-relaxed mb-4">
-                                「自分の意見が企業に届くという体験は、とても貴重でした。インターンで感じたことを正直に伝えることで、少しでも企業が良くなる手助けができたのは嬉しいです。」
-                            </p>
-                            <p class="text-500 font-medium">- 大学4年生</p>
-                        </div>
+                
+                <div class="qa-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="qa-question">
+                        <span class="qa-icon">Q</span>
+                        <span class="qa-text">個人情報は安全に管理されていますか？</span>
+                        <span class="qa-toggle">+</span>
                     </div>
-                </div>
-            </section>
-    
-            <!-- FAQ Section -->
-            <section id="faq" class="py-20 bg-gray-50">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-3xl font-bold text-center mb-12">よくある質問（FAQ）</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- FAQ for Students -->
-                        <div>
-                            <h3 class="text-2xl font-semibold text-orange-600 mb-6 text-center">学生の方向け</h3>
-                            <div class="space-y-4">
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. 匿名で回答できますか？</h4>
-                                    <p class="text-gray-600">A. はい、ご回答いただいた内容は個人が特定できないように匿名化して企業に提出します。</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. 回答することで報酬はありますか？</h4>
-                                    <p class="text-gray-600">A. アンケート内容に応じて、ギフト券などを進呈する場合があります。</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. 回答に何分くらいかかりますか？</h4>
-                                    <p class="text-gray-600">A. 内容によりますが、通常10〜15分程度で完了します。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ for Companies -->
-                        <div>
-                            <h3 class="text-2xl font-semibold text-blue-600 mb-6 text-center">企業の方向け</h3>
-                            <div class="space-y-4">
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. 料金プランを教えてください。</h4>
-                                    <p class="text-gray-600">A. 料金プランはヒアリング後に個別にご提案します。お気軽にお問い合わせください。</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. どのくらいの学生にアンケートできますか？</h4>
-                                    <p class="text-gray-600">A. 学生の属性やアンケート内容により異なります。ヒアリング時にお客様のニーズに合わせてご説明します。</p>
-                                </div>
-                                <div class="p-6 bg-white rounded-2xl shadow-lg">
-                                    <h4 class="font-bold text-lg mb-2">Q. アンケート結果はいつ頃届きますか？</h4>
-                                    <p class="text-gray-600">A. アンケート実施後、通常2〜3週間でお届けします。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    
-            <!-- Contact Section -->
-            <section id="contact" class="py-20 bg-blue-500 text-white text-center rounded-t-3xl shadow-lg">
-                <div class="container mx-auto px-4">
-                    <h2 class="text-3xl font-bold mb-4">お問い合わせ</h2>
-                    <p class="text-lg mb-8">
-                        まずはお気軽にご相談ください。<br>貴社の採用課題解決に向け、最適なプランをご提案します。
-                    </p>
-                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
-                        <a href="tel:08019586658" class="text-white hover:text-blue-200 transition-colors">
-                            <p class="text-xl font-semibold">電話番号: 080-1958-6658</p>
-                        </a>
-                        <a href="mailto:miho_f@solizon-fukui.com" class="text-white hover:text-blue-200 transition-colors">
-                            <p class="text-xl font-semibold">メール: miho_f@solizon-fukui.com</p>
-                        </a>
-                    </div>
-                    <p class="text-sm mt-4">対応可能時間/8:00~21:00(毎日元気に対応いたします)</p>
-                </div>
-            </section>
-        </main>
-    
-        <!-- Footer -->
-        <footer class="bg-gray-800 text-gray-300 py-10 rounded-t-3xl">
-            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- Left: Logo -->
-                <div class="flex justify-center md:justify-start">
-                    <img src="https://placehold.co/100x30/F97316/ffffff?text=声キャン！ロゴ" alt="声キャン！ロゴ"
-                        class="h-8 w-auto rounded-md">
-                </div>
-                <!-- Right: Company Info & SNS -->
-                <div class="text-center md:text-right">
-                    <p class="mb-2">© 2024 声キャン！ All Rights Reserved.</p>
-                    <div class="flex justify-center md:justify-end space-x-4 mt-4">
-                        <a href="#" class="hover:text-white transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.585 0-6.495 2.91-6.495 6.495 0 .509.056 1.002.167 1.474-5.394-.271-10.198-2.858-13.401-6.791-.559.959-.884 2.074-.884 3.251 0 2.251 1.144 4.248 2.887 5.415-.845-.026-1.638-.258-2.329-.643-.005.027-.005.053-.005.081 0 3.15 2.245 5.772 5.224 6.376-.547.148-1.125.23-1.72.23-.423 0-.834-.041-1.233-.117.828 2.586 3.235 4.475 6.088 4.526-2.227 1.745-5.041 2.784-8.093 2.784-.525 0-1.04-.031-1.545-.091 2.883 1.851 6.31 2.93 9.998 2.93 12.001 0 18.528-9.914 18.528-18.528 0-.281-.008-.561-.02-.843.992-.716 1.85-1.604 2.535-2.618z" />
-                            </svg>
-                        </a>
-                        <a href="#" class="hover:text-white transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.895 18.815v-8.815h-2.189v8.815h2.189zm-1.089-9.846c.725 0 1.314-.59 1.314-1.315s-.589-1.314-1.314-1.314-1.314.589-1.314 1.314.589 1.315 1.314 1.315zm12.384 9.846h-2.189v-4.489c0-1.077-.044-2.469-1.503-2.469-1.504 0-1.734 1.168-1.734 2.392v4.566h-2.189v-8.815h2.096v.959h.03c.291-.557.994-.969 2.062-.969 2.203 0 2.611 1.45 2.611 3.328v5.497z" />
-                            </svg>
-                        </a>
+                    <div class="qa-answer">
+                        <span class="qa-icon">A</span>
+                        <span class="qa-text">はい、お客様の個人情報は厳重に管理しております。SSL暗号化通信の採用、アクセス権限の制限、定期的なセキュリティ監査など、多層的なセキュリティ対策を実施しています。</span>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
-
-    <!-- JavaScriptファイルを読み込み -->
-    <script src="script.js" defer></script>
+        </div>
+    </section>
+    
+    <!-- フッター -->
+    <footer class="footer">
+        <p>&copy; 2024 声キャン！. All rights reserved.</p>
+    </footer>
+    
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- カスタムJavaScript -->
+    <script>
+        // AOS初期化
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: true
+        });
+        
+        // カウントアップアニメーション
+        function countUp(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function timer() {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                } else {
+                    if (target >= 1000) {
+                        element.textContent = Math.floor(start).toLocaleString();
+                    } else {
+                        element.textContent = start.toFixed(1);
+                    }
+                    requestAnimationFrame(timer);
+                }
+            }
+            timer();
+        }
+        
+        // Intersection Observerでカウントアップを実行
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const countupElements = entry.target.querySelectorAll('.countup');
+                    countupElements.forEach(element => {
+                        const target = parseFloat(element.dataset.target);
+                        countUp(element, target);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // 実績セクションを監視
+        const achievementsContainer = document.querySelector('.achievements-container');
+        if (achievementsContainer) {
+            observer.observe(achievementsContainer);
+        }
+        
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Q&A アコーディオン機能
+        document.querySelectorAll('.qa-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const qaItem = this.closest('.qa-item');
+                const isActive = qaItem.classList.contains('active');
+                
+                // 他の開いているアイテムを閉じる
+                document.querySelectorAll('.qa-item.active').forEach(item => {
+                    if (item !== qaItem) {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // クリックされたアイテムの開閉を切り替え
+                if (isActive) {
+                    qaItem.classList.remove('active');
+                } else {
+                    qaItem.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
