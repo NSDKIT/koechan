@@ -367,7 +367,7 @@
         
         .message-main {
             color: #CC5500;
-            font-size: 24px; /* PC版のデフォルト */
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
             line-height: 1.4;
@@ -381,7 +381,7 @@
         
         .message-quality {
             color: #CC5500;
-            font-size: 28px; /* PC版のデフォルト */
+            font-size: 28px;
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(204, 85, 0, 0.3);
         }
@@ -422,22 +422,454 @@
             }
             
             .message-main {
-                /* clamp(最小値, 推奨値, 最大値) */
-                /* 最小16px、推奨4vw（ビューポート幅の4%）、最大20px */
-                font-size: clamp(16px, 4vw, 20px); 
-                line-height: 1.2; /* 行間を調整 */
+                font-size: 20px;
             }
             
             .message-quality {
-                /* clamp(最小値, 推奨値, 最大値) */
-                /* 最小18px、推奨5vw（ビューポート幅の5%）、最大24px */
-                font-size: clamp(18px, 5vw, 24px); 
-                line-height: 1.2; /* 行間を調整 */
+                font-size: 24px;
             }
         }
         
         /* 機能説明セクション */
-        @media (max-width: 767px) { /* このブロック全体がすでに767px以下に適用されています */
+        .flow-section {
+            background: #FFF5F0;
+            padding: 80px 20px;
+        }
+        
+        .features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .features-title {
+            color: #CC5500;
+            font-size: 38px;
+            font-weight: bold;
+        }
+        
+        .flow-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .flow-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .flow-subtitle {
+            color: #FF6B35;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .flow-title {
+            color: #CC5500;
+            font-size: 28px;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+        
+        .title-quality {
+            color: #CC5500;
+            font-size: 32px;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        /* フローステップ */
+        .flow-step {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .step-badge {
+            background: #FF8C42;
+            color: white;
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
+            z-index: 10;
+        }
+        
+        .step-number {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .step-label {
+            font-size: 11px;
+            margin-top: -5px;
+        }
+        
+        .step-content {
+            display: flex;
+            align-items: center;
+            padding: 40px 40px 40px 100px;
+            gap: 40px;
+        }
+        
+        .step-text {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .highlight-orange {
+            color: #FF6B35;
+            font-weight: bold;
+        }
+        
+        .step-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .step-note {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .step-result {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .result-text {
+            color: #666;
+        }
+        
+        .result-number {
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .result-note {
+            color: #FF6B35;
+            font-size: 14px;
+        }
+        
+        /* イラスト部分 */
+        .step-illustration {
+            flex-shrink: 0;
+            width: 300px;
+            height: 200px;
+            position: relative;
+        }
+        
+        /* ステップ1: 相談シーン */
+        .consultation-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .interviewer, .interviewee {
+            position: relative;
+        }
+        
+        .person-head {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+        
+        .interviewer-head {
+            background: #FDBCB4;
+        }
+        
+        .interviewee-head {
+            background: #F4C2A1;
+            position: relative;
+        }
+        
+        .glasses {
+            position: absolute;
+            top: 12px;
+            left: 6px;
+            width: 28px;
+            height: 10px;
+            border: 2px solid #333;
+            border-radius: 50%;
+            background: transparent;
+        }
+        
+        .glasses::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 11px;
+            width: 4px;
+            height: 2px;
+            background: #333;
+        }
+        
+        .person-body {
+            width: 50px;
+            height: 60px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .interviewer-body {
+            background: #666;
+        }
+        
+        .interviewee-body {
+            background: #CC5500;
+        }
+        
+        .table {
+            width: 80px;
+            height: 10px;
+            background: #DDD;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        
+        .lightbulb {
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 20px;
+        }
+        
+        /* ステップ2: 企業紹介シーン */
+        .company-introduction {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .advisor {
+            position: relative;
+        }
+        
+        .advisor-head {
+            background: #FDBCB4;
+        }
+        
+        .advisor-body {
+            background: #666;
+        }
+        
+        .documents {
+            position: absolute;
+            bottom: -10px;
+            left: -5px;
+            width: 30px;
+            height: 20px;
+            background: white;
+            border: 1px solid #DDD;
+            border-radius: 2px;
+        }
+        
+        .building {
+            position: relative;
+        }
+        
+        .building-main {
+            width: 60px;
+            height: 80px;
+            background: #FF8C42;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .building-windows {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    white 0px, white 2px,
+                    transparent 2px, transparent 8px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    white 0px, white 2px,
+                    transparent 2px, transparent 8px
+                );
+        }
+        
+        .candidate {
+            position: relative;
+        }
+        
+        .candidate-head {
+            background: #F4C2A1;
+        }
+        
+        .candidate-body {
+            background: #CC5500;
+        }
+        
+        .sparkle-effect {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 16px;
+            animation: sparkleAnimation 1.5s infinite;
+        }
+        
+        /* ステップ3: 成功シーン */
+        .success-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-card {
+            background: white;
+            border: 2px solid #DDD;
+            border-radius: 10px;
+            padding: 10px;
+            width: 80px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .profile-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #F4C2A1;
+            margin: 0 auto 5px;
+        }
+        
+        .person-mini {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #CC5500;
+            margin-top: 20px;
+        }
+        
+        .rating-stars {
+            color: #FFD700;
+            font-size: 12px;
+        }
+        
+        .arrow-down {
+            font-size: 20px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .companies-grid {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .company-option {
+            width: 40px;
+            height: 50px;
+            background: #FF8C42;
+            border-radius: 3px;
+        }
+        
+        .success-advisor {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        
+        .success-head {
+            background: #FDBCB4;
+        }
+        
+        .success-body {
+            background: #666;
+        }
+        
+        .pointing-finger {
+            position: absolute;
+            top: 20px;
+            right: -25px;
+            font-size: 20px;
+        }
+        
+        /* サポート画像のスタイル */
+        .support-image {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .support-image:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.15);
+        }
+        
+        /* ポイ活画像の特別スタイル */
+        .bonus-image {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, #FFF8DC, #FFFFFF);
+            padding: 10px;
+        }
+        
+        .bonus-image:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+
+        
+        /* おまけ機能のスタイル */
+        .bonus-feature {
+            border: 2px solid #FFD700;
+            background: linear-gradient(135deg, #FFF8DC, #FFFFFF);
+        }
+        
+        .bonus-badge {
+            background: #FFD700;
+            color: #CC5500;
+            font-weight: bold;
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 767px) {
             .flow-section {
                 padding: 60px 20px;
             }
@@ -1065,7 +1497,6 @@
                 font-size: 18px;
                 line-height: 1.2;
             }
-            /* message-main と message-quality の定義は clamp() で包括されるため削除 */
         }
         
         /* 中間画面サイズ（321px-480px）での調整 */
@@ -1089,7 +1520,6 @@
                 font-size: 20px;
                 line-height: 1.25;
             }
-            /* message-main と message-quality の定義は clamp() で包括されるため削除 */
         }
         
         
