@@ -872,6 +872,18 @@
             font-weight: bold;
         }
 
+        /* 今後の追加機能のスタイル */
+        .future-feature {
+            border: 2px solid #FFBE9F; /* 少し濃いめの薄いオレンジ色のボーダー */
+            background: linear-gradient(135deg, #FFEDE0, #FFF5F0); /* 薄いオレンジ色のグラデーション */
+        }
+        
+        .future-badge {
+            background: #FFBE9F; /* バッジも薄いオレンジ色に */
+            color: #CC5500; /* テキストカラーは変更なし */
+            font-weight: bold;
+        }
+
         /* モバイル対応 */
         @media (max-width: 767px) {
             .flow-section {
@@ -1658,7 +1670,7 @@
                             <span class="highlight-orange">ES添削や履歴書添削など</span>
                         </h3>
                         <p class="step-description">
-                            就活の不安や疑問を専門家にぶつけ、全力でサポートします。
+                            就活の不安や疑問を専門家にぶつけ、<br>全力でサポートします。
                         </p>
                     </div>
                     <div class="step-illustration">
@@ -1715,23 +1727,40 @@
                 </div>
             </div>
 
-            <!-- 今後機能 -->
-            <div class="flow-step bonus-feature" data-aos="fade-up" data-aos-delay="600">
-                <div class="step-badge bonus-badge">
-                    <span class="step-number">+</span>
-                    <span class="step-label">今後の機能</span>
+            <!-- 今後の追加機能 -->
+            <div class="flow-step future-feature" data-aos="fade-up" data-aos-delay="700">
+                <div class="step-badge future-badge">
+                    <span class="step-number">?</span>
+                    <span class="step-label">今後の<br>追加機能</span>
                 </div>
                 <div class="step-content">
                     <div class="step-text">
                         <h3 class="step-title">
-                            <span class="highlight-orange">就職先適性診断</span>！
+                            <span class="highlight-orange">就職先適性診断</span>
                         </h3>
                         <p class="step-description">
-                            あなたの回答の傾向から、適した就職先をご提案させていただきます。
+                            あなたの回答の傾向から、<br>適した就職先をご提案させていただきます。
                         </p>
                     </div>
                 </div>
             </div>
+            <div class="flow-step future-feature" data-aos="fade-up" data-aos-delay="700">
+                <div class="step-badge future-badge">
+                    <span class="step-number">?</span>
+                    <span class="step-label">今後の<br>追加機能</span>
+                </div>
+                <div class="step-content">
+                    <div class="step-text">
+                        <h3 class="step-title">
+                            <span class="highlight-orange">就活で役立つ豆知識配信機能</span>
+                        </h3>
+                        <p class="step-description">
+                            知っていたら面接でのトーク幅が広がる。<br>世の中の出来事をまるッとお届け！
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
     
