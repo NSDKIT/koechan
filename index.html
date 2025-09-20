@@ -25,7 +25,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             line-height: 1.6;
             color: #333;
-            overflow-x: hidden;
+            overflow-x: auto; /* 横スクロールが必要な場合にスクロールバーを表示 */
         }
         
         /* ヘッダー */
@@ -112,11 +112,14 @@
                 display: block;
                 max-width: none;
                 max-height: none;
-                width: auto;
-                height: 1000vw;
+                width: 100vw; /* 例: 画面幅いっぱいに表示。もし少し横に拡大したいなら120vwなどに調整 */
+                min-height: 50vh; /* 例: 画面の高さの50%以上の高さを確保 */
+                height: auto; /* widthとmin-heightに基づいて自動調整されるように */
                 margin-left: 0;
                 margin-right: 0;
-                margin-bottom: 80px;
+                margin-bottom: 80px; /* 前回の変更で追加した余白 */
+                object-fit: contain; /* 画像全体を表示し、アスペクト比を維持 */
+                /* object-fit: cover; */ /* もし画像を要素いっぱいに広げたいが、一部が切り取られても良い場合はこちら */
             }
         }
         
