@@ -422,15 +422,13 @@
             }
             
             .message-main {
-                /* clamp(最小値, 推奨値, 最大値) */
-                font-size: clamp(16px, 4vw, 20px); 
-                line-height: 1.2; /* 行間を調整 */
+                font-size: 18px; /* 20pxから18pxに縮小 */
+                line-height: 1.5; /* 行間を少し詰める */
             }
             
             .message-quality {
-                /* clamp(最小値, 推奨値, 最大値) */
-                font-size: clamp(18px, 5vw, 24px); 
-                line-height: 1.2; /* 行間を調整 */
+                font-size: 30px; /* 24pxから20pxに縮小 */
+                line-height: 2.0; /* 行間を少し詰める */
             }
         }
         
@@ -442,12 +440,12 @@
         
         .features-header {
             text-align: center;
-            margin-bottom: 60px; /* デスクトップ用 */
+            margin-bottom: 60px;
         }
         
         .features-title {
             color: #CC5500;
-            font-size: 34px; /* 元の38pxから変更済み */
+            font-size: 34px;
             font-weight: bold;
         }
         
@@ -456,18 +454,18 @@
             margin: 0 auto;
         }
         
-        /* flow-header, flow-subtitle, flow-title, title-quality はHTMLで直接使われていないため、必要に応じて削除またはコメントアウトできます */
-        /*
         .flow-header {
             text-align: center;
             margin-bottom: 60px;
         }
+        
         .flow-subtitle {
             color: #FF6B35;
             font-size: 18px;
             font-weight: 500;
             margin-bottom: 15px;
         }
+        
         .flow-title {
             color: #CC5500;
             font-size: 28px;
@@ -475,13 +473,13 @@
             line-height: 1.4;
             margin-bottom: 20px;
         }
+        
         .title-quality {
             color: #CC5500;
             font-size: 32px;
             display: block;
             margin-top: 10px;
         }
-        */
         
         /* フローステップ */
         .flow-step {
@@ -490,13 +488,13 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             overflow: hidden;
-            position: relative; /* バッジがこの要素を基準に配置されます */
+            position: relative;
         }
         
         .step-badge {
             background: #FF8C42;
             color: white;
-            position: absolute; /* デスクトップのデフォルト */
+            position: absolute;
             left: -10px;
             top: 20px;
             width: 80px;
@@ -523,7 +521,7 @@
         .step-content {
             display: flex;
             align-items: center;
-            padding: 40px 40px 40px 100px; /* デスクトップのデフォルト */
+            padding: 40px 40px 40px 100px;
             gap: 40px;
         }
         
@@ -878,14 +876,6 @@
                 padding: 60px 20px;
             }
             
-            .features-header { /* モバイルでのfeatures-headerのマージンを調整 */
-                margin-bottom: 30px; /* タイトルとカードの間のスペースを調整。バッジが重なる余地を作る */
-            }
-
-            .features-title { /* モバイルでのfeatures-titleのフォントサイズを調整 */
-                font-size: clamp(24px, 7vw, 30px); /* 画面サイズに応じて24pxから30pxで動的に調整 */
-            }
-
             .flow-title {
                 font-size: 22px;
             }
@@ -896,17 +886,13 @@
             
             .step-content {
                 flex-direction: column;
-                padding: 60px 20px 30px; /* 元のパディング */
-                padding-top: 80px; /* バッジが重ならないように上部にスペースを追加 */
+                padding: 60px 20px 30px;
                 text-align: center;
             }
             
             .step-badge {
-                position: absolute; /* absolute に戻す */
-                left: 50%;           /* 水平中央に配置 */
-                top: -40px;          /* バッジの高さ80pxの半分を上に突き出す */
-                transform: translateX(-50%); /* 中央寄せの微調整 */
-                margin: 0;           /* static時に設定されていたマージンをリセット */
+                position: static;
+                margin: -30px auto 20px;
             }
             
             .step-illustration {
@@ -1613,7 +1599,7 @@
             <div class="inspiring-message">
                 <p class="message-subtitle">その秘密は…</p>
                 <p class="message-main">
-                    <span class="message-highlight">あなたの声</span>を企業に届けて、<br><span class="message-highlight">ミスマッチをなくす</span>仕組み。
+                    <span class="title-highlight">あなたの声</span>を企業に届けて、<br><span class="title-highlight">ミスマッチをなくす</span>仕組み。
                 </p>
                 <p class="message-quality">声キャン！が、<br>量より質の就活を実現する。</p>
             </div>
