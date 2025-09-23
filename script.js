@@ -1,11 +1,11 @@
 // ヘッダーにスクロールイベントを追加して影を付ける
 window.addEventListener('scroll', function () {
     const header = document.getElementById('header');
-    if (window.scrollY > 50) {
-        header.classList.add('header-shadow');
-    } else {
-        header.classList.remove('header-shadow');
-    }
+    // if (window.scrollY > 50) {
+    //     header.classList.add('header-shadow');
+    // } else {
+    //     header.classList.remove('header-shadow');
+    // }
 });
 
 // モバイルメニューの開閉を制御
