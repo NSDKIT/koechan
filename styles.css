@@ -9,11 +9,6 @@ body {
     color: #333;
 }
 
-/* /* スクロール時にヘッダーに付与される影 */
-.header-shadow {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-} */
-
 /* ファーストビューの背景グラデーション */
 .hero-gradient {
     background: linear-gradient(to right, #F97316, #3B82F6);
