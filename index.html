@@ -44,9 +44,9 @@
         }
         
         .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #FF6B35;
+            height: 40px;
+            width: auto;
+            object-fit: contain;
         }
         
         .header-cta {
@@ -232,7 +232,7 @@
         /* より小さな画面での調整 */
         @media (max-width: 480px) {
             .logo {
-                font-size: 18px;
+                height: 35px;
             }
             
             .header-cta {
@@ -1078,7 +1078,7 @@
             }
             
             .logo {
-                font-size: 28px;
+                height: 60px;
             }
             
             .header-cta {
@@ -1537,7 +1537,7 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
-        <div class="logo">声キャン！</div>
+        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/logo_lp.png" alt="声キャン！" class="logo">
         <button class="header-cta" onclick="window.location.href='https://koecan-v0-9kbd.vercel.app/'">今すぐ始める</button>
     </header>
     
