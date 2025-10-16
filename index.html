@@ -25,7 +25,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             line-height: 1.6;
             color: #333;
-            overflow-x: auto; /* 横スクロールが必要な場合にスクロールバーを表示 (変更なし) */
+            overflow-x: auto;
         }
         
         /* ヘッダー */
@@ -110,14 +110,12 @@
                 display: block;
                 max-width: none;
                 max-height: none;
-                width: 100vw; /* 例: 画面幅いっぱいに表示。もし少し横に拡大したいなら120vwなどに調整 */
-                min-height: 95vh; /* 例: 画面の高さの50%以上の高さを確保 */
-                height: auto; /* widthとmin-heightに基づいて自動調整されるように */
+                width: 100vw;
+                min-height: 95vh;
+                height: auto;
                 margin-left: 0;
                 margin-right: 0;
-/*                 margin-bottom: 10px; /* 前回の変更で追加した余白 */ */
-                object-fit: contain; /* 画像全体を表示し、アスペクト比を維持 */
-                /* object-fit: cover; */ /* もし画像を要素いっぱいに広げたいが、一部が切り取られても良い場合はこちら */
+                object-fit: contain;
             }
         }
         
@@ -173,7 +171,6 @@
         
         /* 重要：各カードに同じ横幅を設定 */
         .achievement-card:nth-child(1) {
-            /* 上のカードを2列目の中央に配置、下の2つと同じサイズ */
             grid-column: 1 / span 2;
             justify-self: center;
             width: calc((100% - 15px) / 2);
@@ -212,8 +209,6 @@
                 transform: translateY(0);
             }
         }
-        
-
         
         .achievement-title {
             font-size: 14px;
@@ -254,7 +249,6 @@
                 padding: 15px;
             }
             
-            /* より小さな画面でも同じ横幅制限を適用 */
             .achievement-card:nth-child(1) {
                 width: calc((100% - 12px) / 2);
             }
@@ -304,7 +298,7 @@
         }
         
         .inspiring-title {
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: bold;
             margin-bottom: 15px;
             line-height: 1.4;
@@ -338,8 +332,6 @@
             transform: translateY(-5px);
         }
         
-
-        
         /* メッセージ部分 */
         .inspiring-message {
             margin-top: 0;
@@ -355,7 +347,7 @@
         
         .message-subtitle {
             color: #CC5500;
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: bold;
             margin-bottom: 15px;
             line-height: 1.4;
@@ -364,7 +356,7 @@
         
         .message-main {
             color: #CC5500;
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: bold;
             margin-bottom: 15px;
             line-height: 1.4;
@@ -379,7 +371,7 @@
         
         .message-quality {
             color: #CC5500;
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             font-weight: bold;
             text-align: left;
             margin-bottom: 0;
@@ -428,11 +420,6 @@
                 padding: 60px 20px;
             }
             
-            .inspiring-title {
-                font-size: 18px;
-                margin-bottom: 40px;
-            }
-            
             .intro-image-container {
                 max-width: 300px;
                 width: 100%;
@@ -440,21 +427,6 @@
             
             .intro-image {
                 border-radius: 10px;
-            }
-            
-            .message-main {
-                font-size: 18px;
-                line-height: 1.4;
-            }
-            
-            .message-quality {
-                font-size: 18px;
-                line-height: 1.4;
-            }
-            
-            .message-subtitle {
-                font-size: 18px;
-                line-height: 1.4;
             }
         }
         
@@ -466,14 +438,18 @@
         
         .features-header {
             text-align: center;
-            /* PC版の画像に合わせて調整 */
-            margin-bottom: 80px; /* ★変更: features-titleと最初のflow-stepの間の余白 */
+            margin-bottom: 80px;
         }
         
         .features-title {
-            color: #CC5500; /* 変更なし */
-            font-size: 30px; /* ★変更: PC版のfeatures-titleのフォントサイズを画像に合わせて調整 */
+            color: #CC5500;
+            font-size: 30px;
             font-weight: bold;
+        }
+        
+        .small-text {
+            font-size: 0.6em;
+            vertical-align: middle;
         }
         
         .flow-container {
@@ -514,7 +490,7 @@
             border-radius: 20px;
             margin-bottom: 40px;
             overflow: hidden;
-            position: relative; /* バッジがこの要素を基準に配置されます */
+            position: relative;
         }
         
         .step-badge {
@@ -545,9 +521,9 @@
         }
         
         .step-content {
-            display: flex; /* PC版の横並びを維持 */
+            display: flex;
             align-items: center;
-            padding: 40px 40px 40px 100px; /* 変更なし */
+            padding: 40px 40px 40px 100px;
         }
         
         .step-text {
@@ -611,258 +587,11 @@
             position: relative;
         }
         
-        /* ステップ1: 相談シーン */
-        .consultation-scene {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-        }
-        
-        .interviewer, .interviewee {
-            position: relative;
-        }
-        
-        .person-head {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-bottom: 5px;
-        }
-        
-        .interviewer-head {
-            background: #FDBCB4;
-        }
-        
-        .interviewee-head {
-            background: #F4C2A1;
-            position: relative;
-        }
-        
-        .glasses {
-            position: absolute;
-            top: 12px;
-            left: 6px;
-            width: 28px;
-            height: 10px;
-            border: 2px solid #333;
-            border-radius: 50%;
-            background: transparent;
-        }
-        
-        .glasses::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: 11px;
-            width: 4px;
-            height: 2px;
-            background: #333;
-        }
-        
-        .person-body {
-            width: 50px;
-            height: 60px;
-            border-radius: 8px 8px 0 0;
-        }
-        
-        .interviewer-body {
-            background: #666;
-        }
-        
-        .interviewee-body {
-            background: #CC5500;
-        }
-        
-        .table {
-            width: 80px;
-            height: 10px;
-            background: #DDD;
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 5px;
-        }
-        
-        .lightbulb {
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            font-size: 20px;
-        }
-        
-        /* ステップ2: 企業紹介シーン */
-        .company-introduction {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .advisor {
-            position: relative;
-        }
-        
-        .advisor-head {
-            background: #FDBCB4;
-        }
-        
-        .advisor-body {
-            background: #666;
-        }
-        
-        .documents {
-            position: absolute;
-            bottom: -10px;
-            left: -5px;
-            width: 30px;
-            height: 20px;
-            background: white;
-            border: 1px solid #DDD;
-            border-radius: 2px;
-        }
-        
-        .building {
-            position: relative;
-        }
-        
-        .building-main {
-            width: 60px;
-            height: 80px;
-            background: #FF8C42;
-            border-radius: 5px 5px 0 0;
-        }
-        
-        .building-windows {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 40px;
-            height: 40px;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    white 0px, white 2px,
-                    transparent 2px, transparent 8px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    white 0px, white 2px,
-                    transparent 2px, transparent 8px
-                );
-        }
-        
-        .candidate {
-            position: relative;
-        }
-        
-        .candidate-head {
-            background: #F4C2A1;
-        }
-        
-        .candidate-body {
-            background: #CC5500;
-        }
-        
-        .sparkle-effect {
-            position: absolute;
-            top: -15px;
-            right: -10px;
-            font-size: 16px;
-            animation: sparkleAnimation 1.5s infinite;
-        }
-        
-        /* ステップ3: 成功シーン */
-        .success-scene {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .profile-card {
-            background: white;
-            border: 2px solid #DDD;
-            border-radius: 10px;
-            padding: 10px;
-            width: 80px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        
-        .profile-photo {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #F4C2A1;
-            margin: 0 auto 5px;
-        }
-        
-        .person-mini {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #CC5500;
-            margin-top: 20px;
-        }
-        
-        .rating-stars {
-            color: #FFD700;
-            font-size: 12px;
-        }
-        
-        .arrow-down {
-            font-size: 20px;
-            color: #666;
-            margin: 5px 0;
-        }
-        
-        .companies-grid {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .company-option {
-            width: 40px;
-            height: 50px;
-            background: #FF8C42;
-            border-radius: 3px;
-        }
-        
-        .success-advisor {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
-        }
-        
-        .success-head {
-            background: #FDBCB4;
-        }
-        
-        .success-body {
-            background: #666;
-        }
-        
-        .pointing-finger {
-            position: absolute;
-            top: 20px;
-            right: -25px;
-            font-size: 20px;
-        }
-        
         /* サポート画像のスタイル */
         .support-image {
             width: 100%;
             height: auto;
-            max-width: 300px; /* PC版のデフォルト */
+            max-width: 300px;
             border-radius: 12px;
             transition: all 0.3s ease;
         }
@@ -880,8 +609,6 @@
             transform: translateY(-3px) scale(1.02);
         }
         
-
-        
         /* おまけ機能のスタイル */
         .bonus-feature {
             border: 2px solid #FFD700;
@@ -893,19 +620,19 @@
             color: #CC5500;
             font-weight: bold;
         }
-
+        
         /* 今後の追加機能のスタイル */
         .future-feature {
-            border: 2px solid #FFBE9F; /* 少し濃いめの薄いオレンジ色のボーダー */
-            background: linear-gradient(135deg, #FFEDE0, #FFF5F0); /* 薄いオレンジ色のグラデーション */
+            border: 2px solid #FFBE9F;
+            background: linear-gradient(135deg, #FFEDE0, #FFF5F0);
         }
         
         .future-badge {
-            background: #FFBE9F; /* バッジも薄いオレンジ色に */
-            color: #CC5500; /* テキストカラーは変更なし */
+            background: #FFBE9F;
+            color: #CC5500;
             font-weight: bold;
         }
-
+        
         /* モバイル対応 */
         @media (max-width: 767px) {
             .flow-section {
@@ -927,21 +654,21 @@
             }
             
             .step-badge {
-                position: absolute; /* absolute に戻す */
-                left: 0px;        /* PC版と同じオフセット */
-                top: 20px;          /* PC版と同じオフセット */
-                transform: none;    /* transformを解除してPC版の位置に */
-                margin: 0;          /* static時に設定されていたマージンをリセット */
+                position: absolute;
+                left: 0px;
+                top: 20px;
+                transform: none;
+                margin: 0;
             }
             
             .step-illustration {
-                width: 100%; /* 親要素の幅いっぱいに */
-                max-width: 250px; /* 最大幅を設定 */
-                height: auto; /* 高さは自動調整 */
+                width: 100%;
+                max-width: 250px;
+                height: auto;
             }
             
             .support-image {
-                max-width: 100%; /* .step-illustrationのサイズに合わせる */
+                max-width: 100%;
                 border-radius: 8px;
             }
             
@@ -1158,6 +885,11 @@
                 padding: 100px 40px;
             }
             
+            .inspiring-content {
+                max-width: 1400px;
+                gap: 60px;
+            }
+            
             .inspiring-title {
                 font-size: 32px;
                 margin-bottom: 40px;
@@ -1165,12 +897,7 @@
             }
             
             .intro-image-container {
-                margin: 80px auto;
-                max-width: 800px;
-            }
-            
-            .intro-image {
-                border-radius: 20px;
+                max-width: 400px;
             }
             
             .message-main {
@@ -1178,6 +905,10 @@
             }
             
             .message-quality {
+                font-size: 32px;
+            }
+            
+            .message-subtitle {
                 font-size: 32px;
             }
             
@@ -1498,50 +1229,17 @@
         /* 極小画面（320px以下）での調整 */
         @media (max-width: 320px) {
             .inspiring-title {
-                font-size: 18px;
                 margin-bottom: 30px;
                 line-height: 1.3;
-            }
-            
-            .message-main {
-                font-size: 18px;
-                line-height: 1.4;
-            }
-            
-            .message-quality {
-                font-size: 18px;
-                line-height: 1.4;
-            }
-            
-            .message-subtitle {
-                font-size: 18px;
-                line-height: 1.4;
             }
         }
         
         /* 中間画面サイズ（321px-480px）での調整 */
         @media (min-width: 321px) and (max-width: 480px) {
             .inspiring-title {
-                font-size: 20px;
                 line-height: 1.3;
             }
-            
-            .message-main {
-                font-size: 20px;
-                line-height: 1.4;
-            }
-            
-            .message-quality {
-                font-size: 20px;
-                line-height: 1.4;
-            }
-            
-            .message-subtitle {
-                font-size: 20px;
-                line-height: 1.4;
-            }
         }
-        
         
         /* フッター */
         .footer {
@@ -1555,7 +1253,7 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
-        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/logo_lp.png" alt="声キャン！" class="logo">
+        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/lp_logo.png" alt="声キャン！" class="logo">
         <button class="header-cta" onclick="window.location.href='https://koecan-v0-9kbd.vercel.app/'">今すぐ始める</button>
     </header>
     
@@ -1628,7 +1326,7 @@
 
             
             <div class="features-header">
-                <h2 class="features-title" data-aos="fade-up">声キャン！でできること</h2>
+                <h2 class="features-title" data-aos="fade-up">声キャン！<span class="small-text">で</span>できること</h2>
             </div>
 
             <!-- 機能1 -->
