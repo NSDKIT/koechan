@@ -295,7 +295,7 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: 60px;
+            gap: 40px;
         }
         
         .inspiring-text-content {
@@ -316,8 +316,8 @@
         /* イントロ画像コンテナ */
         .intro-image-container {
             position: relative;
-            width: 100%;
-            max-width: 500px;
+            width: 50%;
+            max-width: 450px;
             flex-shrink: 0;
             text-align: center;
         }
@@ -391,6 +391,11 @@
             .message-subtitle {
                 text-align: center;
             }
+            
+            .intro-image-container {
+                width: 80%;
+                max-width: 400px;
+            }
         }
         
         @media (max-width: 767px) {
@@ -404,7 +409,8 @@
             }
             
             .intro-image-container {
-                max-width: 350px;
+                max-width: 300px;
+                width: 100%;
             }
             
             .intro-image {
