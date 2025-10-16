@@ -314,6 +314,10 @@
             margin-top: 0;
         }
         
+        .title-break {
+            display: none;
+        }
+        
         /* イントロ画像コンテナ */
         .intro-image-container {
             position: relative;
@@ -394,6 +398,17 @@
             
             .inspiring-title {
                 text-align: center;
+            }
+            
+            .title-line-1,
+            .title-line-2 {
+                display: block;
+            }
+            
+            .title-break {
+                display: block;
+                content: "";
+                height: 15px;
             }
             
             .message-main,
@@ -1540,7 +1555,7 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
-        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/lp_logo.png" alt="声キャン！" class="logo">
+        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/logo_lp.png" alt="声キャン！" class="logo">
         <button class="header-cta" onclick="window.location.href='https://koecan-v0-9kbd.vercel.app/'">今すぐ始める</button>
     </header>
     
@@ -1588,7 +1603,7 @@
         <div class="inspiring-content">
             <div class="inspiring-text-content">
                 <h2 class="inspiring-title">
-                    就活迷子にさようなら。<br>声キャン！で相性ピッタリの企業に出会おう。
+                    <span class="title-line-1">就活迷子にさようなら。</span><span class="title-break"></span><span class="title-line-2">声キャン！で相性ピッタリの企業に出会おう。</span>
                 </h2>
                 
                 <div class="inspiring-message">
