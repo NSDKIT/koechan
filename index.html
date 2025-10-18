@@ -49,6 +49,18 @@
             object-fit: contain;
         }
         
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .logo-link:hover .logo {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
         .header-cta {
             background: linear-gradient(135deg, #FF6B35, #F7931E);
             color: white;
@@ -510,12 +522,12 @@
         }
         
         .step-number {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
         }
         
         .step-label {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
             margin-top: -5px;
         }
@@ -915,11 +927,11 @@
             }
             
             .step-number {
-                font-size: 18px;
+                font-size: 24px;
             }
             
             .step-label {
-                font-size: 18px;
+                font-size: 24px;
             }
             
             .step-title {
@@ -1235,7 +1247,9 @@
 <body>
     <!-- ヘッダー -->
     <header class="header">
-        <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/lp_logo.png" alt="声キャン！" class="logo">
+        <a href="#" class="logo-link" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">
+            <img src="https://raw.githubusercontent.com/NSDKIT/koechan/refs/heads/main/img/lp_logo.png" alt="声キャン！" class="logo">
+        </a>
         <button class="header-cta" onclick="window.location.href='https://koecan-v0-9kbd.vercel.app/'">今すぐ始める</button>
     </header>
     
@@ -1288,7 +1302,7 @@
                 
                 <div class="inspiring-message">
                     <p class="message-subtitle">その秘密は…</p>
-                    <p class="message-main">価値観診断で相性ピッタリの企業がわかる。</p>
+                    <p class="message-main">あなたの価値観診断で相性ピッタリの企業がわかる。</p>
                     <p class="message-quality">声キャン！が、量より質の就活を実現する。</p>
                 </div>
             </div>
@@ -1343,7 +1357,7 @@
                 <div class="step-content">
                     <div class="step-text">
                         <h3 class="step-title">
-                            <span class="highlight-orange">就活の専門家に相談</span>
+                            <span class="highlight-orange">就活の専門家に相談できる</span>
                         </h3>
                         <p class="step-description">
                             キャリア相談・ES/履歴書の添削を就活の専門家が、全力でサポートします。
@@ -1411,6 +1425,9 @@
                 \ お得にポイ活しながら /<br>
                 あなたらしい未来を見つけに行こう！
             </h2>
+            <p class="join-cta-subtitle" data-aos="fade-up" data-aos-delay="200">
+                あなたの理想の就活を始めませんか？
+            </p>
             <div class="join-cta-button-container" data-aos="fade-up" data-aos-delay="400">
                 <!-- 外部リンクURL変更はこちら -->
                 <a href="https://koecan-v0-9kbd.vercel.app/" target="_blank" rel="noopener noreferrer" class="join-cta-button">
